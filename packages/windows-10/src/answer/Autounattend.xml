@@ -171,9 +171,14 @@
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -File a:\install-windows-features.ps1</CommandLine>
+                    <Description>Install Windows Features</Description>
+                    <Order>3</Order>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
                     <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -File a:\install-winrm.ps1</CommandLine>
                     <Description>Setup Windows Remote Management</Description>
-                    <Order>3</Order>
+                    <Order>4</Order>
                 </SynchronousCommand>
             </FirstLogonCommands>
             <OOBE>

@@ -1,6 +1,8 @@
 # Output
 dist
 *.box
+output
+.vagrant
 
 # Logs
 logs
