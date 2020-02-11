@@ -1,3 +1,7 @@
+# Output
+dist
+*.box
+
 # Logs
 logs
 *.log
@@ -10,6 +14,7 @@ lerna-debug.log*
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # Runtime data
+packer_cache
 pids
 *.pid
 *.seed

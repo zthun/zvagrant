@@ -1,0 +1,37 @@
+{
+  "variables": {
+    "iso": null,
+    "architecture": null
+  },
+  "builders": [
+    {
+      "type": "parallels-iso",
+      "output_directory": "dist/windows-10/{{ user `architecture`}}",
+      "guest_os_type": "win-10",
+      "vm_name": "win10-parallels",
+      "cpus": 2,
+      "memory": 4096,
+      "disk_size": 500000,
+      "parallels_tools_flavor": "win",
+      "parallels_tools_mode": "disable",
+      "iso_url": "{{ user `iso` }}",
+      "iso_checksum_type": "none",
+      "communicator": "winrm",
+      "winrm_username": "vagrant",
+      "winrm_password": "vagrant",
+      "winrm_timeout": "8h",
+      "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+      "shutdown_timeout": "15m",
+      "floppy_files": [
+        "packages/windows-10/src/answer/Autounattend.xml",
+        "packages/windows-10/src/scripts/install-winrm.ps1"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "compression_level": 1
+    }
+  ]
+}
