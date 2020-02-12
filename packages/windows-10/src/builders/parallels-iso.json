@@ -25,9 +25,28 @@
       "shutdown_timeout": "15m",
       "floppy_files": [
         "packages/windows-10/src/answer/Autounattend.xml",
-        "packages/windows-10/src/scripts/install-winrm.ps1",
-        "packages/windows-10/src/scripts/install-windows-features.ps1"
+        "packages/windows-10/src/scripts/install-winrm.ps1"
       ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "powershell",
+      "script": "packages/windows-10/src/scripts/install-parallels-tools-additions.ps1",
+      "elevated_user": "vagrant",
+      "elevated_password": "vagrant"
+    },
+    {
+      "type": "powershell",
+      "script": "packages/windows-10/src/scripts/install-chocolatey-packages.ps1",
+      "elevated_user": "vagrant",
+      "elevated_password": "vagrant"
+    },
+    {
+      "type": "powershell",
+      "script": "packages/windows-10/src/scripts/install-windows-features.ps1",
+      "elevated_user": "vagrant",
+      "elevated_password": "vagrant"
     }
   ],
   "post-processors": [
