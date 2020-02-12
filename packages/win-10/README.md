@@ -11,5 +11,6 @@ This image contains a Windows 10 image with the following software installed:
 - 7zip
 - Notepad++
 - Node
+- Git
 
 See CHANGELOG for version specific information.

@@ -2,14 +2,17 @@
   "variables": {
     "iso": null,
     "name": null,
-    "version": null
+    "version": null,
+    "os": "win-10",
+    "tag": "{{user `os`}}-{{ user `name`}}",
+    "title": "{{user `tag`}}-{{user `version`}}"
   },
   "builders": [
     {
       "type": "parallels-iso",
-      "output_directory": "output/windows-10/parallels-iso/{{ user `name`}}",
-      "guest_os_type": "win-10",
-      "vm_name": "win-10-parallels",
+      "output_directory": "output",
+      "guest_os_type": "{{user `os`}}",
+      "vm_name": "{{user `tag`}}",
       "cpus": 2,
       "memory": 4096,
       "disk_size": 500000,
@@ -24,35 +27,45 @@
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
       "shutdown_timeout": "15m",
       "floppy_files": [
-        "packages/windows-10/src/answer/Autounattend.xml",
-        "packages/windows-10/src/scripts/install-winrm.ps1"
+        "packages/win-10/src/answer/Autounattend.xml",
+        "packages/win-10/src/scripts/install-winrm.ps1"
       ]
     }
   ],
   "provisioners": [
     {
       "type": "powershell",
-      "script": "packages/windows-10/src/scripts/install-parallels-tools-additions.ps1",
+      "script": "packages/win-10/src/scripts/install-parallels-tools-additions.ps1",
       "elevated_user": "vagrant",
       "elevated_password": "vagrant"
     },
     {
       "type": "powershell",
-      "script": "packages/windows-10/src/scripts/install-chocolatey-packages.ps1",
+      "script": "packages/win-10/src/scripts/install-chocolatey-packages.ps1",
       "elevated_user": "vagrant",
       "elevated_password": "vagrant"
     },
     {
       "type": "powershell",
-      "script": "packages/windows-10/src/scripts/install-windows-features.ps1",
+      "script": "packages/win-10/src/scripts/install-windows-features.ps1",
       "elevated_user": "vagrant",
       "elevated_password": "vagrant"
     }
   ],
   "post-processors": [
-    {
-      "type": "vagrant",
-      "output": "dist/windows-10/parallels-iso/windows-10-{{ user `name` }}-{{ user `version`}}.box"
-    }
+    [
+      {
+        "type": "vagrant",
+        "compression_level": 9,
+        "keep_input_artifact": false,
+        "vagrantfile_template": "packages/win-10/src/templates/vagrantfile",
+        "output": "dist/{{user `title`}}-{{.Provider}}.box"
+      },
+      {
+        "type": "vagrant-cloud",
+        "box_tag": "zthun/{{user `tag`}}",
+        "version": "{{user `version`}}"
+      }
+    ]
   ]
 }
