@@ -12,5 +12,6 @@ This image contains a Windows 10 image with the following software installed:
 - Notepad++
 - Node
 - Git
+- Docker Desktop
 
 See CHANGELOG for version specific information.

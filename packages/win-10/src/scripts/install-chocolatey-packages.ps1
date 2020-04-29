@@ -32,3 +32,5 @@ choco install googlechrome -y
 choco install firefox -y
 # https://chocolatey.org/packages/git
 choco install git -y
+# https://chocolatey.org/packages/docker-desktop
+choco install docker-desktop -y

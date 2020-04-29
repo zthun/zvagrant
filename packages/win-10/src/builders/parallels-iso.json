@@ -1,8 +1,8 @@
 {
   "variables": {
     "iso": null,
-    "name": null,
-    "version": null,
+    "name": "1909-x64",
+    "version": "1.0.0-{{isotime \"20060102030405\"}}",
     "os": "win-10",
     "tag": "{{user `os`}}-{{ user `name`}}",
     "title": "{{user `tag`}}-{{user `version`}}",
@@ -42,13 +42,13 @@
     },
     {
       "type": "powershell",
-      "script": "packages/{{user `os`}}/src/scripts/install-chocolatey-packages.ps1",
+      "script": "packages/{{user `os`}}/src/scripts/install-windows-features.ps1",
       "elevated_user": "vagrant",
       "elevated_password": "vagrant"
     },
     {
       "type": "powershell",
-      "script": "packages/{{user `os`}}/src/scripts/install-windows-features.ps1",
+      "script": "packages/{{user `os`}}/src/scripts/install-chocolatey-packages.ps1",
       "elevated_user": "vagrant",
       "elevated_password": "vagrant"
     }
